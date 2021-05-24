@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-8bwvrg&e)6-msqveabv#%uc($jwtr2niv(%-9w!csrweb#@$yn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "827fa6753c1d.ngrok.io"
+]
 
 
 # Application definition
@@ -125,3 +128,7 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Settings for Line Channel
+LINE_CHANNEL_ACCESS_TOKEN = '76zPADGWnsl0YgABfX616/pdprwdM3OMTnhnqub2cN2odZrAhDV0o+yf6zGtEknRdCN7H7YpjG5mzj4z8I4WmoEMPWfeLy9F0bjiHMxLpEWNZz/X+/uTy2ccpmleammPiXUj8kMaVfilYEoms6FCSQdB04t89/1O/w1cDnyilFU='
+LINE_CHANNEL_SECRET = '707e476ba81cb6d0033890a9796bc63b'

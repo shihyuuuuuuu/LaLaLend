@@ -1,10 +1,20 @@
 # Create your views here.
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.conf import settings
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 
 from .forms import DemandForm, SupplyForm
 from .models import Demand, Supply
+
+from linebot import LineBotApi, WebhookParser
+from linebot.exceptions import InvalidSignatureError, LineBotApiError
+from linebot.models import MessageEvent, TextSendMessage
+
+
+line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
+parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
 def fill_in_product(request):
     user_id = request.GET['user_id']
@@ -56,3 +66,26 @@ def fill_in_product(request):
     }
 
     return render(request, '../templates/product_form.html', context)
+
+@csrf_exempt
+def callback(request):
+    if request.method == 'POST':
+        signature = request.META['HTTP_X_LINE_SIGNATURE']
+        body = request.body.decode('utf-8')
+
+        try:
+            events = parser.parse(body, signature)  # 傳入的事件
+        except InvalidSignatureError:
+            return HttpResponseForbidden()
+        except LineBotApiError:
+            return HttpResponseBadRequest()
+
+        for event in events:
+            if isinstance(event, MessageEvent):  # 如果有訊息事件
+                line_bot_api.reply_message(  # 回復傳入的訊息文字
+                    event.reply_token,
+                    TextSendMessage(text=event.message.text)
+                )
+        return HttpResponse()
+    else:
+        return HttpResponseBadRequest()

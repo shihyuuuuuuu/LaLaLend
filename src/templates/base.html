@@ -4,12 +4,7 @@
   {% block title %}<title>LaLaLend</title>{% endblock %}
 </head>
 <body>
-  <form action="" method="post">
-    {% csrf_token %}
-    <table>
-    {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit">
-  </form>
+    {% block content %}
+    {% endblock %}
 </body>
 </html>
