@@ -18,5 +18,5 @@ class Demand(Product):
 
 class Supply(Product):
     description = models.TextField()
-    photo = models.ImageField(upload_to="")
+    photo = models.ImageField(upload_to="images/")
     price = models.IntegerField()

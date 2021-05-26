@@ -1,14 +1,16 @@
 from django import forms
-from .models import Demand, Product, Supply
+from .models import Product
 
 class ProductForm(forms.ModelForm):
+    city = forms.CharField(help_text="例：台北市")
+    district = forms.CharField(help_text="例：中正區")
+    village = forms.CharField(help_text="例：建國里")
+
     class Meta:
         model = Product
         fields = [
             "username",
             "item",
-            "location_long",
-            "location_lat",
         ]
 
 class DemandForm(ProductForm):
