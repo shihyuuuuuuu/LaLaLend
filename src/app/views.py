@@ -28,7 +28,7 @@ def fill_in_product(request):
             form = DemandForm(request.POST)
             if form.is_valid():
                 data = form.cleaned_data
-                location = geolocater.geocode(f"{data['village']} {data['district']} {data['city']}")
+                location = geolocater.geocode(f"{data['district']} {data['city']}")
 
                 product = Demand(
                     user_id = user_id,
@@ -44,7 +44,7 @@ def fill_in_product(request):
             form = SupplyForm(request.POST, request.FILES)
             if form.is_valid():
                 data = form.cleaned_data
-                location = geolocater.geocode(f"{data['village']} {data['district']} {data['city']}")
+                location = geolocater.geocode(f"{data['district']} {data['city']}")
 
                 product = Supply(
                     user_id = user_id,
@@ -58,21 +58,17 @@ def fill_in_product(request):
                 )
                 product.save()
         
-        #     # redirect to a new URL:
-        #     return HttpResponseRedirect(reverse('all-borrowed') )
+        return HttpResponse("謝啦！")
 
     # If this is a GET (or any other method) create the default form.
     else:
         if mode == "demand":
-            form = DemandForm()
+            context = {'form': DemandForm(),}
+            page = "demand"
         elif mode == "supply":
-            form = SupplyForm()
-
-    context = {
-        'form': form,
-    }
-
-    return render(request, '../templates/product_form.html', context)
+            page = "supply"
+        context = {'form': SupplyForm(),}
+        return render(request, f'../templates/{page}.html', context)
 
 @csrf_exempt
 def callback(request):

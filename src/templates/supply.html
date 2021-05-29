@@ -1,0 +1,39 @@
+{% extends "product.html" %}
+{% block title %}
+<div class="page_title">
+    我想要出租
+</div>
+{% endblock %}
+{% block custom %}
+<style>
+    .page_title {
+        color: #75bde7;
+    }
+
+    .ui.form .field input,
+    .ui.form .field textarea {
+        border-color: #75bde7;
+    }
+</style>
+<div class="field">
+    <label>商品描述</label>
+    <div class="ui left large icon input">
+        <i class="pencil alternate large icon"></i>
+        <textarea rows="3" name="{{ form.description.name }}"></textarea>
+    </div>
+</div>
+<div class="field">
+    <label>商品相片</label>
+    <div class="ui left large icon input">
+        <i class="file image large icon"></i>
+        <input type="{{ form.photo.field.widget.input_type  }}" name="{{ form.photo.name }}">
+    </div>
+</div>
+<div class="field">
+    <label>價錢</label>
+    <div class="ui left large icon input">
+        <i class="dollar sign large icon"></i>
+        <input type="{{ form.price.field.widget.input_type  }}" name="{{ form.price.name }}">
+    </div>
+</div>
+{% endblock %}

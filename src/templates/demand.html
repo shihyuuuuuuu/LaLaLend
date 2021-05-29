@@ -1,0 +1,44 @@
+{% extends "product.html" %}
+{% block title %}
+<div class="page_title">
+    我想要借用
+</div>
+{% endblock %}
+{% block custom %}
+<style>
+    .page_title {
+        color: #f19835;
+    }
+
+    .ui.form .field input,
+    .ui.form .field textarea {
+        border-color: #f19835;
+    }
+
+    hr.rounded {
+        background: #f19835;
+        border: 3px solid #f19835;
+        border-radius: 5px;
+        margin: auto;
+        width: 2rem;
+    }
+</style>
+<div class="field">
+    <label>價錢區間</label>
+    <div class="two fields">
+        <div class="field">
+            <div class="ui left large icon input">
+                <i class="dollar sign large icon"></i>
+                <input type="{{ form.price_low.field.widget.input_type  }}" name="{{ form.price_low.name }}">
+            </div>
+        </div>
+        <hr class="rounded">
+        <div class="field">
+            <div class="ui left large icon input">
+                <i class="dollar sign large icon"></i>
+                <input type="{{ form.price_high.field.widget.input_type  }}" name="{{ form.price_high.name }}">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
