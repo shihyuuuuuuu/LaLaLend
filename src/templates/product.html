@@ -52,6 +52,15 @@
     </div>
   </div>
   <div class="field">
+    <label>分類</label>
+    <select class="ui search dropdown" name="{{ form.category.name }}">
+      <option value="">---選擇商品分類---</option>
+      {% for c in category %}
+      <option value="{{ c }}">{{ c }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="field">
     <label>縣市</label>
     <div class="ui left large icon input">
       <i class="map large icon"></i>

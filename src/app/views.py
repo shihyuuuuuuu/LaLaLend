@@ -7,6 +7,7 @@ from django.urls import reverse
 
 from .forms import DemandForm, SupplyForm
 from .models import Demand, Supply
+from .schema import Category
 
 from geopy.geocoders import Nominatim
 from linebot import LineBotApi, WebhookParser
@@ -62,12 +63,13 @@ def fill_in_product(request):
 
     # If this is a GET (or any other method) create the default form.
     else:
+        category = [tag.value for tag in Category]
         if mode == "demand":
-            context = {'form': DemandForm(),}
+            context = {'form': DemandForm(), 'category': category}
             page = "demand"
         elif mode == "supply":
+            context = {'form': SupplyForm(), 'category': category}
             page = "supply"
-        context = {'form': SupplyForm(),}
         return render(request, f'../templates/{page}.html', context)
 
 @csrf_exempt
