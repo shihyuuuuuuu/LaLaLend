@@ -35,12 +35,14 @@ def fill_in_product(request):
                     user_id = user_id,
                     username = data["username"],
                     item = data["item"],
+                    category = data["category"],
                     location_long = location.longitude,
                     location_lat = location.latitude,
                     price_low = data["price_low"],
                     price_high = data["price_high"],
                 )
                 product.save()
+                recommend = product.recommend()
         elif mode == "supply":
             form = SupplyForm(request.POST, request.FILES)
             if form.is_valid():
@@ -51,6 +53,7 @@ def fill_in_product(request):
                     user_id = user_id,
                     username = data["username"],
                     item = data["item"],
+                    category = data["category"],
                     location_long = location.longitude,
                     location_lat = location.latitude,
                     description = data["description"],
@@ -58,6 +61,7 @@ def fill_in_product(request):
                     price = data["price"],
                 )
                 product.save()
+                recommend = product.recommend()
         
         return HttpResponse("謝啦！")
 
