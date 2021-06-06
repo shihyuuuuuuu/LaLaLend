@@ -1,0 +1,84 @@
+{
+    "type": "carousel",
+    "contents": [
+        {
+            "type": "bubble",
+            "hero": {
+                "type": "image",
+                "size": "full",
+                "aspectRatio": "8:8",
+                "aspectMode": "cover",
+                "url": "https://www.ikea.com.tw/dairyfarm/tw/images/147/0814728_PE776013_S4.jpg"
+            },
+            "body": {
+                "type": "box",
+                "layout": "vertical",
+                "spacing": "sm",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": "一張樸實無華的IKEA椅子",
+                        "wrap": true,
+                        "weight": "bold",
+                        "size": "xl",
+                        "color": "#0000ff"
+                    },
+                    {
+                        "type": "box",
+                        "layout": "baseline",
+                        "contents": [
+                            {
+                                "type": "icon",
+                                "url": "https://image.flaticon.com/icons/png/512/1142/1142682.png",
+                                "size": "xl"
+                            },
+                            {
+                                "type": "text",
+                                "text": "距離約 0.4 km",
+                                "wrap": true,
+                                "weight": "bold",
+                                "size": "xl",
+                                "margin": "sm"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "box",
+                        "layout": "baseline",
+                        "contents": [
+                            {
+                                "type": "icon",
+                                "url": "https://image.flaticon.com/icons/png/512/2854/2854320.png",
+                                "size": "xl"
+                            },
+                            {
+                                "type": "text",
+                                "text": "$199",
+                                "wrap": true,
+                                "weight": "bold",
+                                "size": "xl",
+                                "margin": "sm"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "footer": {
+                "type": "box",
+                "layout": "vertical",
+                "spacing": "sm",
+                "contents": [
+                    {
+                        "type": "button",
+                        "style": "primary",
+                        "action": {
+                            "type": "uri",
+                            "label": "加入您的租物車",
+                            "uri": "https://www.ikea.com.tw/zh"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

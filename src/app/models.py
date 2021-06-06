@@ -23,7 +23,21 @@ class Product(models.Model):
         p1_location = (self.location_lat, self.location_long)
         p2_location = (p2.location_lat, p2.location_long)
         dist =  distance.distance(p1_location, p2_location).kilometers
-        return 1 if 0<=dist<5 else 0.75 if 5<=dist<10 else 0.5 if 10<=dist<15 else 0.25 if 15<=dist<20 else 0
+        
+        if 0 <= dist < 5:
+            score, string = [1, "< 5 公里"]
+        elif 5 <= dist < 10:
+            score, string = [0.75, "5~10 公里"]
+        elif 10 <= dist < 15:
+            score, string = [0.5, "10~15 公里"]
+        elif 15 <= dist < 20:
+            score, string = [0.25, "15~20 公里"]
+        elif 20 <= dist:
+            score, string = [0.0, "> 20 公里"]
+        else:
+            score, string = [0.0, "未知 公里"]
+        
+        return [score, string]
 
     def cal_price(self, p2):
         if isinstance(self, Supply):
@@ -49,16 +63,19 @@ class Product(models.Model):
                 continue
             else:
                 n_score = self.cal_name(p)
-                d_score = self.cal_dist(p)
+                d_score, dist = self.cal_dist(p)
                 p_score = self.cal_price(p)
                 total_score = self.weighted_score(n_score, d_score, p_score)
-                product_score.append([p, total_score])
+                product_score.append([p, total_score, dist])
 
         result = sorted(product_score, key=lambda p: p[1], reverse=True)
         if isinstance(self, Demand):
             return result[:3]
         else:
             return [i for i in result if i[1] >= 50]
+    
+    def __str__(self) -> str:
+        return self.item
 
 class Demand(Product):
     price_low = models.IntegerField()
@@ -69,3 +86,5 @@ class Supply(Product):
     description = models.TextField()
     photo = models.ImageField(upload_to="images/")
     price = models.IntegerField()
+    line_id =  models.CharField(max_length=120, blank=True)
+    phone_num = models.CharField(max_length=255, blank=True)

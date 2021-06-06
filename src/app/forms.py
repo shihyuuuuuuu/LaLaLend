@@ -26,3 +26,5 @@ class SupplyForm(ProductForm):
     description = forms.CharField(widget= forms.Textarea,required=True)
     photo = forms.ImageField()
     price = forms.IntegerField()
+    line_id = forms.CharField()
+    phone_num = forms.CharField()

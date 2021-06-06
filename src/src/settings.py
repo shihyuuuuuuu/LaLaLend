@@ -28,7 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
-    "827fa6753c1d.ngrok.io"
+    "827fa6753c1d.ngrok.io",
+    "6f61d26a6d4c.ngrok.io"
 ]
 
 
@@ -133,5 +134,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Settings for Line Channel
-LINE_CHANNEL_ACCESS_TOKEN = '76zPADGWnsl0YgABfX616/pdprwdM3OMTnhnqub2cN2odZrAhDV0o+yf6zGtEknRdCN7H7YpjG5mzj4z8I4WmoEMPWfeLy9F0bjiHMxLpEWNZz/X+/uTy2ccpmleammPiXUj8kMaVfilYEoms6FCSQdB04t89/1O/w1cDnyilFU='
-LINE_CHANNEL_SECRET = '707e476ba81cb6d0033890a9796bc63b'
+LINE_CHANNEL_ACCESS_TOKEN = '/UFqPQpXYnGqeyYzXpR9sEfFjJN3M2CLeEE7da9EvxKzuOrl6yeaVw6QI4i4vs/CoNk2MX+Xh4CzLzOoSvue50purtzIncYlLK+tjD+86HmLHpTV1EaqJUoRLYZ+FhjhrJyEGo7OP+U6DNiipXs6yQdB04t89/1O/w1cDnyilFU='
+LINE_CHANNEL_SECRET = 'a83ce7b8b6ac829804d25102a46e9ec6'
