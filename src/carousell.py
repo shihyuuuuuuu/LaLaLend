@@ -9,31 +9,11 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "src.settings")
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 from app.models import Supply
+from app.schema import Category
 
 # References:
 # https://stackoverflow.com/questions/48163641/django-core-exceptions-appregistrynotready-apps-arent-loaded-yet-django-2-0/48168360
 # https://stackoverflow.com/questions/1308386/programmatically-saving-image-to-django-imagefield
-
-class Category(enum.Enum):
-    her_fashion = "她的時尚"
-    cosmetic = "美裝保養"
-    his_fashion = "他的時尚"
-    mobile = "手機平板"
-    computer_3c = "電腦3C"
-    camera = "相機攝影"
-    appliance = "家電電器"
-    sports = "運動休閒"
-    home = "居家生活"
-    baby = "親子用品"
-    pet = "寵物用品"
-    book = "圖書"
-    textbook = "教科書"
-    toy = "玩具"
-    tickets = "票券"
-    house = "賣屋租屋"
-    scooter = "機車"
-    car = "汽車"
-    lilicoco = "哩哩扣扣"
 
 
 def parse_products(url):
