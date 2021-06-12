@@ -69,14 +69,34 @@
                 "spacing": "sm",
                 "contents": [
                     {
-                        "type": "button",
-                        "style": "primary",
-                        "action": {
-                            "type": "uri",
-                            "label": "加入您的租物車",
-                            "uri": "https://www.ikea.com.tw/zh"
-                        }
+                        "type": "box",
+                        "layout": "baseline",
+                        "contents": [
+                            {
+                                "type": "text",
+                                "text": "$199",
+                                "wrap": true,
+                                "weight": "bold",
+                                "size": "xl",
+                                "margin": "sm"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "box",
+                        "layout": "baseline",
+                        "contents": [
+                            {
+                                "type": "text",
+                                "text": "$199",
+                                "wrap": true,
+                                "weight": "bold",
+                                "size": "xl",
+                                "margin": "sm"
+                            }
+                        ]
                     }
+
                 ]
             }
         }

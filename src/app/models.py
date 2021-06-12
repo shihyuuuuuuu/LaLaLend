@@ -53,13 +53,13 @@ class Product(models.Model):
 
     def recommend(self):
         if isinstance(self, Demand):
-            products = Supply.objects.all()
+            products = Supply.objects.filter(category=self.category)
         elif isinstance(self, Supply):
-            products = Demand.objects.all()
+            products = Demand.objects.filter(category=self.category)
 
         product_score = []
         for p in products:
-            if fuzz.ratio(self.item, p.item) == 0:
+            if fuzz.ratio(p.item, self.item) < 10:
                 continue
             else:
                 n_score = self.cal_name(p)
@@ -72,7 +72,7 @@ class Product(models.Model):
         if isinstance(self, Demand):
             return result[:3]
         else:
-            return [i for i in result if i[1] >= 50]
+            return [i for i in result if i[1] >= 20]
     
     def __str__(self) -> str:
         return self.item

@@ -24,18 +24,18 @@ def parse_products(url):
         return []
 
     result = []
-    for product in r.html.find(".D_rw.D_rr.D_sn"):
-        username = product.find(".D_rG>p")[0].text
-        info = product.find("a.D_b_")[1]
+    for product in r.html.find(".D_mq.D_pJ.D_pO"):
+        username = product.find(".D_pZ>p")[0].text
+        info = product.find("a.D_ic")[1]
         p_url = main_url + info.attrs.get("href")
         r = session.get(p_url)
         try:
-            location = r.html.find(".D_F .D_BQ .D_BS")[1].text
+            location = r.html.find(".D_oe .D_vC .D_vF")[1].text
         except:
             print(f"{p_url} get location failed...")
             continue
-        photo = r.html.find(".D_GT .D_GU img")[0].attrs["src"]
-        infos = info.find("p")
+        photo = r.html.find(".D_Ce .D_Cf img")[0].attrs["src"]
+        infos = product.find("a.D_ic:last-child>p")
         item = infos[0].text
         price = infos[1].text.split("NT$")[1].replace(",", "")
         description = infos[2].text
@@ -64,32 +64,46 @@ headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KH
 default_long = 121.517005
 default_lan = 25.047931
 
-for category in r.html.find("a.D_sR.D_b_"):
+for category in r.html.find("a.D_FX.D_ic"):
     if category.text in categories:
         target_urls.append([main_url + category.attrs.get("href"), category.text])
 
+assert target_urls, "No category links"
+
 for link, category in target_urls:
+    print(f"------ {category} start-------")
     result = parse_products(link)
-
+    if not result:
+        print("No Products at this category")
+    exists = Supply.objects.filter(category=category)
+    exists_item = [i.item for i in exists]
     for r in result:
-        location = geolocater.geocode(f"{r['location']}")
-        product = Supply(
-            user_id = "fake_user_id",
-            username = r["username"],
-            item = r["item"],
-            category = category,
-            location_long = location.longitude if location else default_long,
-            location_lat = location.latitude if location else default_lan,
-            description = r["description"],
-            price = r["price"],
-            line_id = "lalalend_official",
-            phone_num = "0912345678"
-        )
+        if r["item"] in exists_item:
+            print(f"Duplicate item: {r['item']}")
+            continue
+        try:
+            location = geolocater.geocode(f"{r['location']}")
+            product = Supply(
+                user_id = "fake_user_id",
+                username = r["username"],
+                item = r["item"],
+                category = category,
+                location_long = location.longitude if location else default_long,
+                location_lat = location.latitude if location else default_lan,
+                description = r["description"],
+                price = r["price"],
+                line_id = "lalalend_official",
+                phone_num = "0912345678"
+            )
 
-        url = r["photo"]
-        filename = url.split("/")[-1]
-        r = requests.get(url, headers=headers)
-        with open(f'media/images/{filename}', 'wb') as outfile:
-            outfile.write(r.content)
-        product.photo = f'images/{filename}'
-        product.save()
+            url = r["photo"]
+            filename = url.split("/")[-1]
+            if filename[-4:] != ".jpg":
+                filename += ".jpg"
+            r = requests.get(url, headers=headers)
+            with open(f'media/images/{filename}', 'wb') as outfile:
+                outfile.write(r.content)
+            product.photo = f'images/{filename}'
+            product.save()
+        except:
+            pass

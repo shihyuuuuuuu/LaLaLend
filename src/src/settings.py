@@ -29,9 +29,10 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "827fa6753c1d.ngrok.io",
-    "6f61d26a6d4c.ngrok.io"
+    "1e46fb280d74.ngrok.io"
 ]
 
+DOMAIN = "https://1e46fb280d74.ngrok.io"
 
 # Application definition
 

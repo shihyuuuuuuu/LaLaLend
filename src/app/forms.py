@@ -13,7 +13,7 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = [
-            "username",
+            # "username",
             "item",
         ]
 
@@ -23,7 +23,7 @@ class DemandForm(ProductForm):
 
 
 class SupplyForm(ProductForm):
-    description = forms.CharField(widget= forms.Textarea,required=True)
+    description = forms.CharField(widget= forms.Textarea, required=False)
     photo = forms.ImageField()
     price = forms.IntegerField()
     line_id = forms.CharField()

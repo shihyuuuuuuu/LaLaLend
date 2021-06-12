@@ -6,15 +6,15 @@
   <!-- semantic-ui support -->
   <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <link rel="icon" href="media/images/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
   <style>
+    @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
     .container {
-      width: 50%;
       padding: 4rem;
-      margin-right: auto;
-      margin-left: auto;
+      margin: auto;
     }
   </style>
   <div class="container">
@@ -23,6 +23,12 @@
     {% block content %}
     {% endblock %}
   </div>
+  <script>
+    function myFunction() {
+      document.getElementById("submit_btn").style.display = "none";
+      document.getElementById("submit_label").style.display = "block";
+    }
+  </script>
 </body>
 
 </html>

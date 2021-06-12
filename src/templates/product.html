@@ -1,23 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 <style>
-  @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
-
   body {
     background-color: whiteSmoke;
   }
 
   .page_title {
     font-family: 'cwTeXYen', sans-serif;
-    font-size: 3rem;
+    font-size: 5rem;
     font-weight: bold;
     margin: 3rem;
     text-align: center;
-  }
-
-  form {
-    margin: auto;
-    width: 90%;
   }
 
   .ui.form .field {
@@ -25,8 +18,9 @@
   }
 
   .ui.form .field label {
-    font-size: 1.3rem;
-    margin-bottom: 0.7rem;
+    font-size: 3.0rem;
+    margin-top: 3.0rem;
+    margin-bottom: 1.5rem;
   }
 
   .ui.form .field input,
@@ -35,50 +29,55 @@
     color: grey;
   }
 </style>
-<form action="" method="post" enctype="multipart/form-data" class="ui form">
-  {% csrf_token %}
-  <div class="field">
-    <label>暱稱</label>
-    <div class="ui left large icon input">
-      <i class="user large icon"></i>
-      <input type="{{ form.username.field.widget.input_type }}" name="{{ form.username.name }}">
-    </div>
+<div class="ui padded centered grid">
+  <div class="eight wide computer fourteen wide mobile  column">
+    <form action="" method="post" enctype="multipart/form-data" class="ui massive form">
+      {% csrf_token %}
+      <!-- <div class="field">
+        <label>暱稱</label>
+        <div class="ui left large icon input">
+          <i class="user large icon"></i>
+          <input type="{{ form.username.field.widget.input_type }}" name="{{ form.username.name }}">
+        </div>
+      </div> -->
+      <div class="field">
+        <label>商品</label>
+        <div class="ui left large icon input">
+          <i class="basketball ball large icon"></i>
+          <input type="{{ form.item.field.widget.input_type }}" name="{{ form.item.name }}">
+        </div>
+      </div>
+      <div class="field">
+        <label>分類</label>
+        <select class="ui search dropdown" style="height: 6rem;" name="{{ form.category.name }}">
+          <option value="">---選擇商品分類---</option>
+          {% for c in category %}
+          <option value="{{ c }}">{{ c }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label>縣市</label>
+        <div class="ui left large icon input">
+          <i class="map large icon"></i>
+          <input type="{{ form.city.field.widget.input_type }}" name="{{ form.city.name }}">
+        </div>
+      </div>
+      <div class="field">
+        <label>鄉鎮市區</label>
+        <div class="ui left large icon input">
+          <i class="map signs large icon"></i>
+          <input type="{{ form.district.field.widget.input_type }}" name="{{ form.district.name }}">
+        </div>
+      </div>
+      {% block custom %}
+      {% endblock %}
+      <button onclick="myFunction()" id="submit_btn" class="massive ui button">
+        提交
+        <i class="paper plane right icon"></i>
+      </button>
+      <label id="submit_label" style="display: none;">表單提交中...請等待跳轉</label>
+    </form>
   </div>
-  <div class="field">
-    <label>商品</label>
-    <div class="ui left large icon input">
-      <i class="basketball ball large icon"></i>
-      <input type="{{ form.item.field.widget.input_type }}" name="{{ form.item.name }}">
-    </div>
-  </div>
-  <div class="field">
-    <label>分類</label>
-    <select class="ui search dropdown" name="{{ form.category.name }}">
-      <option value="">---選擇商品分類---</option>
-      {% for c in category %}
-      <option value="{{ c }}">{{ c }}</option>
-      {% endfor %}
-    </select>
-  </div>
-  <div class="field">
-    <label>縣市</label>
-    <div class="ui left large icon input">
-      <i class="map large icon"></i>
-      <input type="{{ form.city.field.widget.input_type }}" name="{{ form.city.name }}">
-    </div>
-  </div>
-  <div class="field">
-    <label>鄉鎮市區</label>
-    <div class="ui left large icon input">
-      <i class="map signs large icon"></i>
-      <input type="{{ form.district.field.widget.input_type }}" name="{{ form.district.name }}">
-    </div>
-  </div>
-  {% block custom %}
-  {% endblock %}
-  <button class="ui basic button">
-    提交
-    <i class="paper plane right icon"></i>
-  </button>
-</form>
+</div>
 {% endblock %}
