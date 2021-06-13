@@ -9,6 +9,7 @@ chardet==4.0.0
 click==8.0.1
 cssselect==1.1.0
 decorator==5.0.9
+dj-database-url==0.5.0
 Django==3.2.3
 django-enumfields==2.1.1
 django-storages==1.11.1

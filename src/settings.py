@@ -150,6 +150,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LINE_CHANNEL_ACCESS_TOKEN = '/UFqPQpXYnGqeyYzXpR9sEfFjJN3M2CLeEE7da9EvxKzuOrl6yeaVw6QI4i4vs/CoNk2MX+Xh4CzLzOoSvue50purtzIncYlLK+tjD+86HmLHpTV1EaqJUoRLYZ+FhjhrJyEGo7OP+U6DNiipXs6yQdB04t89/1O/w1cDnyilFU='
 LINE_CHANNEL_SECRET = 'a83ce7b8b6ac829804d25102a46e9ec6'
 
+# Heroku: Update database configuration from $DATABASE_URL.
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
