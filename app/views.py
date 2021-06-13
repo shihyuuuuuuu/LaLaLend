@@ -49,7 +49,7 @@ def get_flex_message(recommend):
 
     for rec in recommend:
         photo = rec[0].photo.name
-        product["hero"]["url"] = f"{MEDIA_URL}/media/{photo}"
+        product["hero"]["url"] = f"{MEDIA_URL}/{photo}"
         product["body"]["contents"][0]["text"] = rec[0].item
         product["body"]["contents"][1]["contents"][1]["text"] = f"距離 {rec[2]}"
         product["body"]["contents"][2]["contents"][1]["text"] = f"${rec[0].price}"
