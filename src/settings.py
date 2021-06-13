@@ -33,7 +33,7 @@ ALLOWED_HOSTS = [
     "lala-lend.herokuapp.com"
 ]
 
-DOMAIN = "lala-lend.herokuapp.com"
+DOMAIN = "https://lala-lend.herokuapp.com"
 
 # Application definition
 
