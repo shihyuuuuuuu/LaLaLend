@@ -29,7 +29,8 @@ DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "827fa6753c1d.ngrok.io",
-    "1e46fb280d74.ngrok.io"
+    "1e46fb280d74.ngrok.io",
+    "lala-lend.herokuapp.com"
 ]
 
 DOMAIN = "https://1e46fb280d74.ngrok.io"
