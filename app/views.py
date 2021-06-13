@@ -72,7 +72,7 @@ def home(request):
 
         for i in randomlist:
             p = {
-                "photo": products[i].photo.url,
+                "photo": products[i].photo.path,
                 "name": products[i].item if len(products[i].item) < 35 else products[i].item[:35] + "...",
                 "price": products[i].price,
                 "date": products[i].created_at,
