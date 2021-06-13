@@ -2,15 +2,16 @@ appdirs==1.4.4
 asgiref==3.3.4
 backcall==0.2.0
 beautifulsoup4==4.9.3
+boto==2.49.0
 bs4==0.0.1
 certifi==2020.12.5
 chardet==4.0.0
 click==8.0.1
 cssselect==1.1.0
 decorator==5.0.9
-dj-database-url==0.5.0
 Django==3.2.3
 django-enumfields==2.1.1
+django-storages==1.11.1
 fake-useragent==0.1.11
 future==0.18.2
 geographiclib==1.50
