@@ -12,7 +12,7 @@ from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage, TemplateSendMessage, FlexSendMessage, ButtonsTemplate, URITemplateAction
 
-from src.settings import DOMAIN
+from src.settings import DOMAIN, MEDIA_URL
 
 from .forms import DemandForm, SupplyForm
 from .models import Demand, Supply
@@ -48,8 +48,8 @@ def get_flex_message(recommend):
     contents = []
 
     for rec in recommend:
-        photo = rec[0].photo.name if ".jpg" in rec[0].photo.name or ".jpeg" in rec[0].photo.name else rec[0].photo.name + ".jpg"
-        product["hero"]["url"] = f"{DOMAIN}/media/{photo}"
+        photo = rec[0].photo.name
+        product["hero"]["url"] = f"{MEDIA_URL}/media/{photo}"
         product["body"]["contents"][0]["text"] = rec[0].item
         product["body"]["contents"][1]["contents"][1]["text"] = f"距離 {rec[2]}"
         product["body"]["contents"][2]["contents"][1]["text"] = f"${rec[0].price}"
