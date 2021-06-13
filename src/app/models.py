@@ -1,6 +1,5 @@
 from django.db import models
 from enumfields import EnumField
-from fuzzywuzzy import fuzz
 from geopy import distance
 
 from .schema import Category
@@ -9,7 +8,6 @@ from .schema import Category
 # Create your models here.
 class Product(models.Model):
     user_id = models.CharField(max_length=255)
-    username = models.CharField(max_length=255)
     item = models.CharField(max_length=255)
     category = EnumField(Category, default=Category.lilicoco)
     location_long = models.DecimalField(max_digits=9, decimal_places=6)
@@ -17,7 +15,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def cal_name(self, p2):
-        return fuzz.ratio(self.item, p2.item) / 100
+        return len(set(self.item) & set(p2.item)) / len(self.item)
 
     def cal_dist(self, p2):
         p1_location = (self.location_lat, self.location_long)
@@ -59,7 +57,7 @@ class Product(models.Model):
 
         product_score = []
         for p in products:
-            if fuzz.ratio(p.item, self.item) < 10:
+            if len(set(self.item) & set(p.item)) / len(self.item) < 0.3:
                 continue
             else:
                 n_score = self.cal_name(p)
@@ -84,7 +82,7 @@ class Demand(Product):
 
 class Supply(Product):
     description = models.TextField()
-    photo = models.ImageField(upload_to="images/")
+    photo = models.ImageField(max_length=255, upload_to="images/")
     price = models.IntegerField()
-    line_id =  models.CharField(max_length=120, blank=True)
+    line_id =  models.CharField(max_length=255, blank=True)
     phone_num = models.CharField(max_length=255, blank=True)

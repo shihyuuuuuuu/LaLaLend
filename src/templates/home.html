@@ -1,48 +1,66 @@
 {% extends "base.html" %}
 {% block title %}
-<style>
-    .page_title {
-        font-family: 'cwTeXYen', sans-serif;
-        font-size: 3rem;
-        font-weight: bold;
-        margin-bottom: 3rem;
-        text-align: center;
-    }
-</style>
 <div class="page_title">
-    商品列表
+    <div style="font-size: 5rem; margin: 3rem;">
+        商品列表
+    </div>
+    <div style="color: grey; font-size: 2rem; margin-bottom: 3rem;">
+        刷新頁面可獲得新的推薦喔！
+    </div>
 </div>
-<div class="page_title" style="color: grey; font-size: 1.5rem;">
-    刷新頁面可獲得新的推薦喔！（建議使用電腦瀏覽此頁）
-</div>
-
 {% endblock %}
 {% block content %}
+<style>
+    .page_title {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .ui.centered.card {
+        width: auto;
+    }
+
+    .ui.card>.image>img {
+        object-fit: cover;
+        height: 350px;
+        width: 100%;
+    }
+
+    .ui.card>.content>.header:not(.ui) {
+        font-size: 2rem;
+    }
+
+    .ui.card>.content>.meta>.date {
+        display: block;
+        font-size: 1.7rem;
+        margin: 1rem auto;
+    }
+
+    .ui.card>.content>.description:not(.ui) {
+        font-size: 1.9rem;
+        line-height: 2.1rem;
+    }
+</style>
 <div class="ui grid">
     {% for p in item_list %}
     <div class="four wide computer eight wide mobile column">
         <div class="ui centered card">
             <div class="image">
-                <img style="height: 350px;" src={{ p.photo }}>
+                <img src={{ p.photo }}>
             </div>
-            <div style="height: 200px;" class="content">
-                <a class="header">{{ p.name }}</a>
+            <div class="content" style="height: 310px;">
+                <div class="header">{{ p.name }}</div>
                 <div class="meta">
                     <span class="date">{{ p.date }}</span>
                 </div>
-                <div class="description">{{ p.description }}
-                </div>
+                <div class="description">{{ p.description }}</div>
             </div>
-            <div class="extra content">
-                <a>
-                    <i class="dollar sign icon"></i>
-                    NT. {{ p.price }}
-                </a>
+            <div class="extra content" style="font-size: 1.7rem;">
+                <i class="dollar sign icon"></i>
+                NT. {{ p.price }}
             </div>
         </div>
     </div>
     {% endfor %}
-
 </div>
-
 {% endblock %}

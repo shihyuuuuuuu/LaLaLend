@@ -98,7 +98,7 @@ for link, category in target_urls:
 
             url = r["photo"]
             filename = url.split("/")[-1]
-            if filename[-4:] != ".jpg":
+            if ".jpg" not in filename:
                 filename += ".jpg"
             r = requests.get(url, headers=headers)
             with open(f'media/images/{filename}', 'wb') as outfile:

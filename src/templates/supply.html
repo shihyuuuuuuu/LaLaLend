@@ -19,7 +19,8 @@
     <label>商品描述</label>
     <div class="ui left large icon input">
         <i class="pencil alternate large icon"></i>
-        <textarea rows="3" name="{{ form.description.name }}"></textarea>
+        <textarea placeholder="{{ form.description.field.help_text }}" rows="3"
+            name="{{ form.description.name }}"></textarea>
     </div>
 </div>
 <div class="field">
@@ -33,21 +34,24 @@
     <label>價錢</label>
     <div class="ui left large icon input">
         <i class="dollar sign large icon"></i>
-        <input type="{{ form.price.field.widget.input_type  }}" name="{{ form.price.name }}">
+        <input placeholder="{{ form.price.field.help_text }}" type="{{ form.price.field.widget.input_type  }}"
+            name="{{ form.price.name }}">
     </div>
 </div>
 <div class="field">
     <label>Line ID</label>
     <div class="ui left large icon input">
         <i class="comment alternate large icon"></i>
-        <input type="{{ form.line_id.field.widget.input_type  }}" name="{{ form.line_id.name }}">
+        <input placeholder="{{ form.line_id.field.help_text }}" type="{{ form.line_id.field.widget.input_type  }}"
+            name="{{ form.line_id.name }}">
     </div>
 </div>
 <div class="field">
     <label>聯絡電話</label>
     <div class="ui left large icon input">
         <i class="phone large icon"></i>
-        <input type="{{ form.phone_num.field.widget.input_type  }}" name="{{ form.phone_num.name }}">
+        <input placeholder="{{ form.phone_num.field.help_text }}" type="{{ form.phone_num.field.widget.input_type  }}"
+            name="{{ form.phone_num.name }}">
     </div>
 </div>
 {% endblock %}

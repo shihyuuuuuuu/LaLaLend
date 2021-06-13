@@ -3,18 +3,24 @@
 
 <head>
   <title>LaLaLend 速速借</title>
-  <!-- semantic-ui support -->
   <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-  <link rel="icon" href="media/images/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="media/favicon.ico" type="image/x-icon" />
+  <meta name='viewport' content='user-scalable=0'>
 </head>
 
 <body>
   <style>
     @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+
     .container {
-      padding: 4rem;
+      padding: 3rem;
       margin: auto;
+    }
+
+    body {
+      background-color: whiteSmoke;
+      font-family: 'cwTeXYen', sans-serif;
     }
   </style>
   <div class="container">
@@ -23,12 +29,6 @@
     {% block content %}
     {% endblock %}
   </div>
-  <script>
-    function myFunction() {
-      document.getElementById("submit_btn").style.display = "none";
-      document.getElementById("submit_label").style.display = "block";
-    }
-  </script>
 </body>
 
 </html>

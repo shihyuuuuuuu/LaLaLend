@@ -2,7 +2,6 @@
 import copy
 import json
 import random
-from math import prod
 
 from django.conf import settings
 from django.shortcuts import render
@@ -23,9 +22,8 @@ line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
 
-def reply_data(user_id, data):
+def confirm_data(user_id, data):
     mapping = {
-        "username": "暱稱",
         "item": "商品",
         "city": "縣市",
         "district": "鄉鎮市區",
@@ -50,7 +48,7 @@ def get_flex_message(recommend):
     contents = []
 
     for rec in recommend:
-        photo = rec[0].photo.name if ".jpg" in rec[0].photo.name else rec[0].photo.name + ".jpg"
+        photo = rec[0].photo.name if ".jpg" in rec[0].photo.name or ".jpeg" in rec[0].photo.name else rec[0].photo.name + ".jpg"
         product["hero"]["url"] = f"{DOMAIN}/media/{photo}"
         product["body"]["contents"][0]["text"] = rec[0].item
         product["body"]["contents"][1]["contents"][1]["text"] = f"距離 {rec[2]}"
@@ -66,19 +64,22 @@ def home(request):
     if request.method == "GET":
         products = Supply.objects.all()
         randomlist = []
-        for i in range(0,50):
-            n = random.randint(30,len(products)-1)
-            randomlist.append(n)
         result = []
+
+        for i in range(0,30):
+            n = random.randint(0,len(products)-1)
+            randomlist.append(n)
+
         for i in randomlist:
             p = {
-                "photo": products[i].photo.url if ".jpg" in products[i].photo.url else products[i].photo.url + ".jpg",
+                "photo": products[i].photo.url,
                 "name": products[i].item if len(products[i].item) < 35 else products[i].item[:35] + "...",
                 "price": products[i].price,
                 "date": products[i].created_at,
-                "description": products[i].description if len(products[i].description) < 100 else products[i].description[:100] + "...",
+                "description": products[i].description if len(products[i].description) < 70 else products[i].description[:70] + "...",
             }
             result.append(p)
+
         context = {
             "item_list": result,
         }
@@ -89,18 +90,16 @@ def product_form(request):
     user_id = request.GET['user_id']
     mode = request.GET['mode']
 
-    # If this is a POST request then process the Form data
     if request.method == 'POST':
         geolocater = Nominatim(user_agent='lalalend')
         if mode == "demand":
             form = DemandForm(request.POST)
             if form.is_valid():
                 data = form.cleaned_data
-                reply_data(user_id, data)
+                confirm_data(user_id, data)
                 location = geolocater.geocode(f"{data['district']} {data['city']}")
                 product = Demand(
                     user_id = user_id,
-                    username = "default user",
                     item = data["item"],
                     category = data["category"],
                     location_long = location.longitude,
@@ -135,7 +134,6 @@ def product_form(request):
                 location = geolocater.geocode(f"{data['district']} {data['city']}")
                 product = Supply(
                     user_id = user_id,
-                    username = "default user",
                     item = data["item"],
                     category = data["category"],
                     location_long = location.longitude,
@@ -158,12 +156,11 @@ def product_form(request):
                     line_bot_api.push_message(
                         to=id,
                         messages=FlexSendMessage(
-                            alt_text="LaLaLEND 為您推薦",
+                            alt_text="LaLa LEND 為您推薦",
                             contents=flex_message
                         )
                     )
         return render(request, '../templates/thank_u.html')
-    # If this is a GET (or any other method) create the default form.
     else:
         category = [tag.value for tag in Category]
         if mode == "demand":
