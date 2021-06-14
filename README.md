@@ -7,7 +7,7 @@
 ## 馬上體驗
 掃一下 QRcode，就可以加入全台最SWAP的租借平台
 
-![QR code](imgs/qrcode.jpg)
+![QR code](imgs/qrcode.png)
 
 ## 功能說明
 1. 加好友後點擊下方選單即可開始對話
@@ -31,10 +31,10 @@
 </p>
 
 ## 軟體架構圖
-![Software diagram](imgs/software_architecture.jpg)
+![Software diagram](imgs/software_architecture.png)
 
 ## 資料庫關聯圖
-![UML](imgs/database_uml.jpg)
+![UML](imgs/database_uml.png)
 
 ## 使用工具與套件
 
