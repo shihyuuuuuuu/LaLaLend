@@ -1,6 +1,7 @@
 # Create your views here.
 import copy
 import json
+import os
 import random
 
 from django.conf import settings
@@ -12,7 +13,10 @@ from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage, TemplateSendMessage, FlexSendMessage, ButtonsTemplate, URITemplateAction
 
-from src.settings import DOMAIN, MEDIA_DOMAIN
+if os.environ.get('DJANGO_PRODUCTION'):
+    from src.production import DOMAIN, MEDIA_DOMAIN
+else:
+    from src.settings import DOMAIN, MEDIA_DOMAIN
 
 from .forms import DemandForm, SupplyForm
 from .models import Demand, Supply
