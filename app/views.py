@@ -13,10 +13,10 @@ from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage, TemplateSendMessage, FlexSendMessage, ButtonsTemplate, URITemplateAction
 
-if os.environ.get('DJANGO_PRODUCTION'):
-    from src.production import DOMAIN, MEDIA_DOMAIN
-else:
+if os.environ.get('DJANGO_DEBUG'):
     from src.settings import DOMAIN, MEDIA_DOMAIN
+else:
+    from src.production import DOMAIN, MEDIA_DOMAIN
 
 from .forms import DemandForm, SupplyForm
 from .models import Demand, Supply
