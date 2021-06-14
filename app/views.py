@@ -12,7 +12,7 @@ from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage, TemplateSendMessage, FlexSendMessage, ButtonsTemplate, URITemplateAction
 
-from src.settings import DOMAIN, MEDIA_URL
+from src.settings import DOMAIN, MEDIA_DOMAIN
 
 from .forms import DemandForm, SupplyForm
 from .models import Demand, Supply
@@ -49,7 +49,7 @@ def get_flex_message(recommend):
 
     for rec in recommend:
         photo = rec[0].photo.name
-        product["hero"]["url"] = f"{MEDIA_URL}{photo}"
+        product["hero"]["url"] = f"{MEDIA_DOMAIN}{photo}"
         product["body"]["contents"][0]["text"] = rec[0].item
         product["body"]["contents"][1]["contents"][1]["text"] = f"距離 {rec[2]}"
         product["body"]["contents"][2]["contents"][1]["text"] = f"${rec[0].price}"
